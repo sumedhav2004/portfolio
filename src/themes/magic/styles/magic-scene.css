@@ -1,0 +1,68 @@
+
+/* MAGIC SCENE COORDINATE SYSTEM */
+
+[data-theme-experience="magic"] {
+  --scene-height: 100svh;
+  --scene-width: 100%;
+  --scene-padding-x: clamp(1.5rem, 5vw, 6rem);
+  --scene-padding-y: clamp(2rem, 5vh, 5rem);
+
+  --scene-unit: min(1vw, 1vh);
+
+  position: relative;
+  width: 100%;
+}
+
+/* Individual cinematic scenes */
+
+[data-scene] {
+  position: relative;
+  width: 100%;
+  min-height: var(--scene-height);
+  overflow: hidden;
+  isolation: isolate;
+  container-type: inline-size;
+}
+
+/* Shared visual layers */
+
+[data-scene-layer] {
+  position: absolute;
+  inset: 0;
+}
+
+/* Content positioning */
+
+[data-scene-layer="content"] {
+  position: relative;
+  z-index: 10;
+  padding-inline: var(--scene-padding-x);
+  padding-block: var(--scene-padding-y);
+  pointer-events: none;
+}
+
+[data-scene-layer="content"] a,
+[data-scene-layer="content"] button {
+  pointer-events: auto;
+}
+
+/* Reduced-motion accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+  [data-theme-experience="magic"] * {
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Smaller screens */
+
+@media (max-width: 768px) {
+  [data-theme-experience="magic"] {
+    --scene-padding-x: 1.25rem;
+    --scene-padding-y: 2rem;
+  }
+
+  [data-scene] {
+    min-height: 100svh;
+  }
+}
