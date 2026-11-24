@@ -2,6 +2,7 @@
 "use client";
 
 import "./styles/magic-scene.css";
+import ArrivalLantern from "./components/arrival-lantern";
 
 const scenes = [
   {
@@ -90,7 +91,11 @@ export default function MagicPortfolio() {
             data-scene-layer="content"
             className="relative z-10 min-h-[100svh]"
           >
-            {/* Scene-specific content will go here */}
+            {scene.id === "arrival" && (
+                <div className="absolute bottom-16 left-8 md:left-16">
+                <ArrivalLantern />
+                </div>
+            )}
           </div>
         </section>
       ))}
