@@ -1,8 +1,10 @@
 
 "use client";
 
+import ArrivalScene from "./animations/scenes/arrival/arrival-scene";
+import GreatHallScene from "./animations/scenes/great-hall/great-hall-scene";
 import "./styles/magic-scene.css";
-import ArrivalLantern from "./components/arrival-lantern";
+
 
 const scenes = [
   {
@@ -13,7 +15,7 @@ const scenes = [
   {
     id: "great-hall",
     name: "The Great Hall",
-    section: "About",
+    section: "Experience",
   },
   {
     id: "library",
@@ -46,59 +48,63 @@ export default function MagicPortfolio() {
   return (
     <main
       data-theme-experience="magic"
-      className="relative w-full overflow-hidden bg-[#080914] text-[#F5F0E8]"
+      className="relative w-full overflow-x-clip"
     >
-      {scenes.map((scene, index) => (
-        <section
-          key={scene.id}
-          id={scene.id}
-          data-scene={scene.id}
-          data-scene-index={index}
-          className="relative isolate min-h-[100svh] w-full overflow-hidden"
-        >
-          {/* Scene atmosphere */}
-          <div
-            data-scene-layer="atmosphere"
-            className="absolute inset-0 -z-10 pointer-events-none"
-          />
+      {scenes.map((scene, index) => {
+        if (scene.id === "arrival") {
+          return <ArrivalScene key={scene.id} />;
+        }
 
-          {/* Distant environment */}
-          <div
-            data-scene-layer="distant"
-            className="absolute inset-0 pointer-events-none"
-          />
+        if(scene.id === "great-hall"){
+          return <GreatHallScene key={scene.id} />
+        }
 
-          {/* Main environment */}
-          <div
-            data-scene-layer="environment"
-            className="absolute inset-0 pointer-events-none"
-          />
-
-          {/* Foreground elements */}
-          <div
-            data-scene-layer="foreground"
-            className="absolute inset-0 pointer-events-none"
-          />
-
-          {/* Magical effects */}
-          <div
-            data-scene-layer="effects"
-            className="absolute inset-0 pointer-events-none"
-          />
-
-          {/* Scene content */}
-          <div
-            data-scene-layer="content"
-            className="relative z-10 min-h-[100svh]"
+        return (
+          <section
+            key={scene.id}
+            id={scene.id}
+            data-scene={scene.id}
+            data-scene-index={index}
+            className="relative isolate min-h-[100svh] w-full overflow-hidden"
           >
-            {scene.id === "arrival" && (
-                <div className="absolute bottom-16 left-8 md:left-16">
-                <ArrivalLantern />
-                </div>
-            )}
-          </div>
-        </section>
-      ))}
+            {/* Scene atmosphere */}
+            <div
+              data-scene-layer="atmosphere"
+              className="absolute inset-0 -z-10 pointer-events-none"
+            />
+
+            {/* Distant environment */}
+            <div
+              data-scene-layer="distant"
+              className="absolute inset-0 pointer-events-none"
+            />
+
+            {/* Main environment */}
+            <div
+              data-scene-layer="environment"
+              className="absolute inset-0 pointer-events-none"
+            />
+
+            {/* Foreground elements */}
+            <div
+              data-scene-layer="foreground"
+              className="absolute inset-0 pointer-events-none"
+            />
+
+            {/* Magical effects */}
+            <div
+              data-scene-layer="effects"
+              className="absolute inset-0 pointer-events-none"
+            />
+
+            {/* Scene content */}
+            <div
+              data-scene-layer="content"
+              className="relative z-10 min-h-[100svh]"
+            />
+          </section>
+        );
+      })}
     </main>
   );
 }

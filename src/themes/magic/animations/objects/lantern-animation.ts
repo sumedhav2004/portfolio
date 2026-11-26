@@ -27,7 +27,7 @@ export function createLanternAnimation(root: HTMLElement) {
 
   // Gentle pendulum movement
   const swingTimeline = gsap.to(swing, {
-    rotation: 2.2,
+    rotation: 10.2,
     duration: 2.4,
     ease: "sine.inOut",
     repeat: -1,
@@ -70,8 +70,8 @@ export function createLanternAnimation(root: HTMLElement) {
   // Independent light breathing
   const glowTimeline = gsap.to(glow, {
     opacity: 0.8,
-    scale: 1.08,
-    duration: 1.8,
+    scale: 1.5,
+    duration: 1.2,
     ease: "sine.inOut",
     repeat: -1,
     yoyo: true,

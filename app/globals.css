@@ -78,6 +78,13 @@ body {
   color: var(--theme-foreground);
 }
 
+
+/* =========================================
+   CENTRALIZED TYPOGRAPHY SYSTEM
+========================================= */
+
+/* Default semantic HTML typography */
+
 h1,
 h2,
 h3,
@@ -85,11 +92,87 @@ h4,
 h5,
 h6 {
   font-family: var(--theme-font-heading);
+  color: var(--theme-foreground);
 }
 
-button,
-input,
-textarea,
-select {
-  font: inherit;
+h1 {
+  font-size: var(--type-h1);
+  line-height: 1.1;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: var(--type-h2);
+  line-height: 1.15;
+  font-weight: 600;
+}
+
+h3 {
+  font-size: var(--type-h3);
+  line-height: 1.2;
+  font-weight: 600;
+}
+
+p {
+  font-size: var(--type-body);
+  line-height: 1.75;
+  font-weight: 400;
+}
+
+/* Explicit typography roles */
+
+.type-display {
+  font-family: var(--theme-font-heading);
+  font-size: var(--type-display);
+  line-height: 1.05;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+}
+
+.type-h1 {
+  font-family: var(--theme-font-heading);
+  font-size: var(--type-h1);
+  line-height: 1.1;
+  font-weight: 700;
+}
+
+.type-h2 {
+  font-family: var(--theme-font-heading);
+  font-size: var(--type-h2);
+  line-height: 1.15;
+  font-weight: 600;
+}
+
+.type-h3 {
+  font-family: var(--theme-font-heading);
+  font-size: var(--type-h3);
+  line-height: 1.2;
+  font-weight: 600;
+}
+
+.type-subtitle {
+  font-family: var(--theme-font-body);
+  font-size: var(--type-subtitle);
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+.type-body {
+  font-family: var(--theme-font-body);
+  font-size: var(--type-body);
+  line-height: 1.75;
+  font-weight: 400;
+}
+
+.type-small {
+  font-family: var(--theme-font-body);
+  font-size: var(--type-small);
+  line-height: 1.6;
+}
+
+.type-caption {
+  font-family: var(--theme-font-body);
+  font-size: var(--type-caption);
+  line-height: 1.5;
+  letter-spacing: 0.04em;
 }

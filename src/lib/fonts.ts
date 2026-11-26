@@ -1,6 +1,8 @@
 
 import {
   Sedgwick_Ave_Display,
+  Playwrite_AU_SA_Guides,
+  Mr_Dafoe,
   Inter,
   Oxanium,
   Orbitron,
@@ -9,8 +11,7 @@ import {
 } from "next/font/google";
 
 // MAGIC FONTS
-const magicHeading = Sedgwick_Ave_Display({
-  subsets: ["latin"],
+const magicHeading = Mr_Dafoe({
   weight: "400",
   variable: "--font-magic-heading",
   display: "swap",

@@ -3,8 +3,9 @@
 
 import { useRef } from "react";
 import { useGSAP } from "@/src/lib/animations/gsap"
-import { createLanternAnimation } from "../animations/objects/lantern-animation";
+import { createLanternAnimation } from "../../animations/objects/lantern-animation";
 import LanternFlame from "./lantern-flame";
+import ArrivalParticles from "./arrival-lantern-particles";
 
 export default function ArrivalLantern() {
   const lanternRef = useRef<HTMLDivElement>(null);
@@ -50,6 +51,8 @@ export default function ArrivalLantern() {
           alt=""
           className="block h-auto w-full"
         />
+
+        <ArrivalParticles />
 
         {/* Animated flame */}
         <div

@@ -12,16 +12,14 @@ export default function Sidebar() {
         fixed inset-y-0 left-0 z-40
         flex w-64 flex-col
         border-r border-border
-        bg-surface text-surface-foreground
+        bg-background text-surface-foreground
         px-3 py-6
       "
     >
       {/* Brand */}
       <div className="mb-10 flex flex-col items-center gap-3 px-1">
         <div className="flex h-42 w-42 items-center justify-center rounded-full bg-primary text-primary-foreground">
-          <Image
-           
-          />
+          
         </div>
 
         <div className="flex flex-col">
