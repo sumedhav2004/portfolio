@@ -4,6 +4,9 @@
 import LanternFlame from "../../../components/arrival/lantern-flame";
 import GhostLayer from "../../../components/great-hall/ghost-layer";
 import MagicFlame from "../../../components/great-hall/MagicFlame";
+import { experience } from "../../../../../data/experience";
+import ExperienceParchment from "../../../components/great-hall/experience-parchment";
+import { useState } from "react";
 
 const ROWS = 20;
 const CANDLES_PER_ROW = 10;
@@ -49,7 +52,25 @@ const candles = Array.from(
   }
 ).filter((candle) => candle.col < 2 || candle.col > 7);
 
+
 export default function GreatHallScene() {
+  const [activeIndex, setActiveIndex] = useState(-1);
+const [isSummoning, setIsSummoning] = useState(false);
+const [animationKey, setAnimationKey] = useState(0);
+
+const summonNextExperience = () => {
+  if (isSummoning || experience.length === 0) return;
+
+  setIsSummoning(true);
+
+  setActiveIndex((current) => (current + 1) % experience.length);
+
+  // Every selection gets a fresh animation.
+  setAnimationKey((current) => current + 1);
+};
+
+const selectedExperience =
+  activeIndex >= 0 ? experience[activeIndex] : null;
   return (
     <section
       id="great-hall"
@@ -117,72 +138,89 @@ export default function GreatHallScene() {
       <GhostLayer />
 
       {/* Layer 3 — Goblet and pedestal assembly */}
-      <div
-        data-hall-goblet-assembly
-        className="pointer-events-none absolute bottom-0 left-1/2 z-30 flex w-[clamp(360px,38vw,640px)] -translate-x-1/2 flex-col items-center justify-end"
-      >
-        {/* Goblet with flame */}
-        <div
-          data-hall-goblet
-          className="relative z-10 isolate w-[30%] translate-y-8"
-        >
-          {/* Blue flame — behind the Goblet */}
-          <div
-            className="absolute left-1/2 top-0 z-0 aspect-[3/4] w-[65%]
-              -translate-x-1/2 -translate-y-[84%]"
-          >
-            <MagicFlame variant="blue" />
-          </div>
+      {/* Layer 3 — Goblet and pedestal assembly */}
+<div
+  data-hall-goblet-assembly
+  className="
+    pointer-events-none absolute bottom-0 left-1/2 z-30
+    flex w-[clamp(360px,38vw,640px)]
+    -translate-x-1/2 flex-col items-center justify-end
+  "
+>
+  {/* Interactive Goblet */}
+  <button
+    type="button"
+    data-hall-goblet
+    onClick={summonNextExperience}
+    disabled={isSummoning}
+    aria-label="Summon the next experience"
+    className="
+      pointer-events-auto relative z-10 isolate
+      w-[30%] translate-y-8 cursor-pointer
+      border-0 bg-transparent p-0
+      disabled:cursor-wait
+      focus-visible:outline focus-visible:outline-2
+      focus-visible:outline-offset-4 focus-visible:outline-pink-400
+    "
+  >
+    {/* Flame — turns pink during summoning */}
+    <div
+  data-hall-flame
+  className="
+    absolute left-1/2 top-0 z-0
+    aspect-[3/4] w-[65%]
+    -translate-x-1/2 -translate-y-[84%]
+  "
+>
+  <MagicFlame variant={isSummoning ? "pink" : "blue"} />
+</div>
 
-          {/* Goblet — foreground */}
-          <img
-            src="/themes/magic/elements/great-hall/goblet-of-fire.png"
-            alt="The Goblet of Fire"
-            draggable={false}
-            className="relative z-10 block h-auto w-full object-contain"
-          />
-        </div>
+    {/* Goblet */}
+    <img
+      src="/themes/magic/elements/great-hall/goblet-of-fire.png"
+      alt=""
+      draggable={false}
+      className="relative z-10 block h-auto w-full object-contain"
+    />
+  </button>
 
-        {/* Pedestal */}
-        <div
-          data-hall-pedestal
-          className="relative z-0 w-full"
-        >
-          <img
-            src="/themes/magic/elements/great-hall/pedestal.png"
-            alt="Goblet pedestal"
-            draggable={false}
-            className="block h-auto w-full object-contain"
-          />
-        </div>
-      </div>
+  {/* Pedestal */}
+  <div
+    data-hall-pedestal
+    className="relative z-0 w-full"
+  >
+    <img
+      src="/themes/magic/elements/great-hall/pedestal.png"
+      alt="Goblet pedestal"
+      draggable={false}
+      className="block h-auto w-full object-contain"
+    />
+  </div>
+</div>
 
-      {/* Layer 4 — Parchment summoned from the Goblet */}
-      <div
-        data-hall-parchment
-        className="pointer-events-none absolute left-1/2 top-[30%] z-40 w-[clamp(180px,25vw,340px)] -translate-x-1/2 opacity-0"
-      >
-        <img
-          src="/themes/magic/elements/great-hall/parchment.png"
-          alt="Magical parchment containing experience records"
-          draggable={false}
-          className="block h-auto w-full object-contain"
-        />
-
-        {/* Experience text */}
-        <div
-          data-experience-content
-          className="absolute inset-[20%] flex flex-col items-center justify-center text-center"
-        />
-      </div>
+      {/* Layer 4 — Experience parchment */}
+<ExperienceParchment
+  experience={selectedExperience}
+  animationKey={animationKey}
+  onFlameRestore={() => setIsSummoning(false)}
+/>
 
       {/* Layer 5 — Magical effects */}
       <div
         data-hall-effects
-        className="pointer-events-none relative inset-0 z-50"
+        className="pointer-events-none relative inset-0 z-50 h-full"
       >
         <div className="absolute left-2/5 w-fit">
           <h2>Experience</h2>
+        </div>
+
+        <div className="absolute left-1/3 bottom-10 w-fit font-light text-3xl">
+          <span>
+            <p>" The goblet of fire is an extremely powerful magical object</p>
+          </span>
+          <span>
+            <p>Click Around and Find out "</p>
+          </span>
         </div>
       </div>
     </section>

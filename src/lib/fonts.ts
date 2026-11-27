@@ -2,6 +2,12 @@
 import {
   Sedgwick_Ave_Display,
   Playwrite_AU_SA_Guides,
+  Permanent_Marker,
+  Caveat_Brush,
+  Bad_Script,
+  Ms_Madi,
+  Indie_Flower,
+  Qwigley,
   Mr_Dafoe,
   Inter,
   Oxanium,
@@ -11,15 +17,15 @@ import {
 } from "next/font/google";
 
 // MAGIC FONTS
-const magicHeading = Mr_Dafoe({
+const magicHeading = Ms_Madi({
   weight: "400",
   variable: "--font-magic-heading",
   display: "swap",
 });
 
-const magicBody = Inter({
+const magicBody = Qwigley({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: "400",
   variable: "--font-magic-body",
   display: "swap",
 });
