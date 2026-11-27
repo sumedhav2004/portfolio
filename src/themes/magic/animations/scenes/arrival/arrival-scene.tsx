@@ -85,7 +85,7 @@ export default function ArrivalScene() {
           {/* Main castle */}
           <div
             data-scene-object="arrival-castle"
-            className="absolute right-0 bottom-[-10%] z-10 flex h-full w-full items-end justify-end"
+            className="absolute right-0 bottom-[-5%] z-10 flex h-full w-full items-end justify-end"
           >
             <img
               src="/themes/magic/background/hogwarts-castle.png"

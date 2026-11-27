@@ -31,51 +31,53 @@ export function createArrivalSceneAnimation(root: HTMLElement) {
   }
 
   gsap.set(camera, {
-  scale: 1,
-  x: 0,
-  y: 0,
-  transformOrigin: "0% 0%",
-  force3D: true,
-});
+    scale: 1,
+    transformOrigin: "78% 96%",
+    force3D: true,
+  });
 
   
   const timeline = gsap.timeline({
-  scrollTrigger: {
-  trigger: root,
-  start: "top top",
-  end: "+=220%",
-  scrub: 1.2,
-  pin: true,
-  pinSpacing: true,
-  anticipatePin: 1,
-  invalidateOnRefresh: true,
-  markers: true,
-},
-});
+    scrollTrigger: {
+      trigger: root,
+      start: "top top",
+      end: "+=220%",
+      scrub: 1.2,
+      pin: true,
+      pinSpacing: true,
+      anticipatePin: 1,
+      invalidateOnRefresh: true,
+    },
+  });
 
+  // The landscape begins moving first
+  
 timeline
-  // No independent movement of the background or castle
+  // Keep the distant environment stationary
   .to(distant, {
-    y: 0,
+    yPercent: 0,
     ease: "none",
   }, 0)
 
+  // Keep mountains and castle stationary
   .to(environment, {
-    y: 0,
+    yPercent: 5,
     ease: "none",
   }, 0)
 
-  // Only a tiny foreground movement
+  // Very subtle foreground movement
   .to(foreground, {
-    y: -10,
+    yPercent: -5,
     ease: "none",
   }, 0)
 
+  // Keep magical effects stationary for now
   .to(effects, {
-    y: 0,
+    yPercent: 0,
     ease: "none",
   }, 0)
 
+  // Fade hero content
   .to(content, {
     autoAlpha: 0,
     y: -45,
@@ -84,15 +86,10 @@ timeline
 
     // Camera begins its approach
     .to(camera, {
-      scale: 1,
-      ease: "none",
-    }, 0)
-
-    // Final approach — stronger perspective
-    .to(camera, {
-      scale: 2.4,
-      ease: "none",
-    }, 0);
+      scale: 5.4,
+      autoAlpha: 0,
+      ease: "power1.inOut",
+    }, 0.10)
 
   return () => {
     timeline.scrollTrigger?.kill();

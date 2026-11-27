@@ -78,7 +78,7 @@ export default function AppShell({ children }: AppShellProps) {
 
       <ThemeTransitionManager />
 
-      <main className="ml-64 min-h-screen bg-background text-foreground">
+      <main className="ml-48 min-h-screen bg-background text-foreground">
         {children}
       </main>
     </div>
